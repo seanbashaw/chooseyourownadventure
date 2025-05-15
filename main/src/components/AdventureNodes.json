@@ -1,0 +1,54 @@
+{
+	"title": "The knock on the door",
+	"start_node": "relax",
+	"nodes": {
+		"relax": {
+			"text": "You are relaxing in your living room when you hear a knock on the door.",
+			"choices": {
+				"answer": "Answer the door",
+				"ignore": "Ignore it"
+			}
+		},
+		"answer": {
+			"text": "You open the door and see a pizza man who says \"I have your pizza!\"",
+			"choices": {
+				"thanks": "Thank You",
+				"notmine": "Ignore it"
+			}
+		},
+		"thanks": {
+			"text": "He hands you your pizza.",
+			"win": "Yum"
+		},
+		"notmine": {
+			"text": "\"Oh this is 1603 not 1630. Sorry\" he says while walking away.",
+			"lose": "You die from starvation."
+		},
+		"ignore": {
+			"text": "You ignore the door and after a few more knocks, you hear a thud on the roof.",
+			"choices": {
+				"gooutside": "Go outside",
+				"wait": "Ignore it"
+			}
+		},
+		"gooutside": {
+			"text": "You open the door and see a pizza guy. He says \"NEXT TIME OPEN THE DOOR EARLIER\" and judo chops you.",
+			"lose": "You fall down."
+		},
+		"wait": {
+			"text": "You hear a squeal of tires in rage driving.",
+			"choices": {
+				"gooutside2": "Go outside",
+				"ignoritis": "Ignore it"
+			}
+		},
+		"gooutside2": {
+			"text": "You go outside and see a pizza on your roof. You use your ladder to get it.",
+			"win": "SCORE!"
+		},
+		"ignoritis": {
+			"text": "You ignore it but die from ignorits.",
+			"lose": "Moving around is healthy."
+		}
+	}
+}
