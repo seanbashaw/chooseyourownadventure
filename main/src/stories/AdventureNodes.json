@@ -8,7 +8,7 @@
 				"answer": "🙋 Answer the door",
 				"ignore": "🙈 Ignore it"
 			}
-		},
+		}, 
 		"answer": {
 			"text": "You open the door 🚪 and see a pizza man 🍕 who says \"I have your pizza!\"",
 			"choices": {

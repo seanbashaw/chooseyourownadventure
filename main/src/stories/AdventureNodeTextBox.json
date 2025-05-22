@@ -1,0 +1,271 @@
+{
+  "title": "The Bar 🍸",
+  "start_node": "uberto",
+  "nodes": {
+    "uberto": {
+      "text": "🚶‍♂️ You just parked your ride outside a brand new bar that just opened up. As you walk toward the entrance, you notice a homeless man holding a sign that reads \"Need help 🙏.\"",
+      "choices": {
+        "donate": "💵 Give him $5",
+        "walkin": "🚪 Walk into the bar",
+        "talkhomeless": "🗣️ Talk to the homeless man"
+      }
+    },
+    "talkhomeless": {
+      "text": "🧔‍♂️ The man looks up and says, \"You seem like someone who notices things. That bar’s more than it seems. Watch the lime 🍈 if you go inside.\"",
+      "choices": {
+        "donate": "💵 Give him $5",
+        "walkin": "🚪 Head into the bar"
+      },
+      "textboxChoices": {
+        "askhomeless": {
+          "placeholder": "Ask him something...",
+          "button": "💬 Ask",
+          "regex": {
+            "bar|lime|secret": "homelesshint",
+            "help|why|here": "homelessstory"
+          },
+          "default": "unknownresponse"
+        }
+      }
+    },
+    "homelesshint": {
+      "text": "🧔‍♂️ \"The lime isn’t just a fruit here. It’s a guide. Follow it if you want to see beyond the usual.\" 🍈✨",
+      "choices": {
+        "talkhomeless": "🔙 Talk more",
+        "donate": "💵 Give him $5",
+        "walkin": "🚪 Enter the bar"
+      }
+    },
+    "homelessstory": {
+      "text": "🧔‍♂️ \"I’ve been around this block a few times. The bar changed me once, gave me visions I still can’t explain. Take care inside.\"",
+      "choices": {
+        "talkhomeless": "🔙 Talk more",
+        "donate": "💵 Give him $5",
+        "walkin": "🚪 Enter the bar"
+      }
+    },
+    "donate": {
+      "text": "🧔‍♂️ \"Hey, thanks man! If you're heading into the bar, order a key lime shot! 🍈 It's the best part of going there.\"",
+      "choices": {
+        "walkin": "👍 Thank him and walk into the bar"
+      }
+    },
+    "walkin": {
+      "text": "🍻 You step into the bar and approach the bartender, who turns toward you and says, \"What'll it be?\"",
+      "choices": {
+        "water": "💧 \"I'll take a water!\""
+      },
+      "textboxChoices": {
+        "illhavea": {
+          "placeholder": "🗣️ I'll have a...",
+          "button": "🍹 Order",
+          "regex": {
+            "soda|pop|coke|sprite": "soda",
+            "beer|wine|shot|liquor": "liquor",
+            "key lime shot": "keylime",
+            "milk": "milkorder"
+          },
+          "default": "unknown"
+        }
+      }
+    },
+    "water": {
+      "text": "💦 The bartender hands you a glass of water and says, \"This one's on me. Stay hydrated! 💧\"",
+      "choices": {
+        "walkin": "🔁 Walk into the bar again"
+      }
+    },
+    "soda": {
+      "text": "🥤 \"Sounds like someone’s getting bubbly! They've got the best sodas here,\" says the person sitting next to you.",
+      "choices": {
+        "sodadrinker": "😄 \"I've drunk my fair share of sodas in my day.\"",
+        "horses": "🐴 \"Do you like horses?\""
+      },
+      "textboxChoices": {
+        "sodachat": {
+          "placeholder": "Talk to the soda fan...",
+          "button": "💬 Chat",
+          "regex": {
+            "favorite|flavor|drink": "sodaflavor",
+            "root beer|dr pepper|orange": "sodaflavor",
+            "what|why|who": "sodaphilosophy"
+          },
+          "default": "unknownresponse"
+        }
+      }
+    },
+    "sodadrinker": {
+      "text": "🥂 \"Then you're in the right place, friend. Cheers to carbonated life! 🥤✨\"",
+      "choices": {
+        "walkin": "🍻 Go back to the bar"
+      }
+    },
+    "horses": {
+      "text": "😨 \"I'm not sure why you asked that... but I have a terrible fear of horses! 🐎\"",
+      "lose": "🚫 You're kindly asked to leave the bar."
+    },
+    "liquor": {
+      "text": "🥃 \"Sounds like someone’s looking to have a wild night!\" the bartender jokes as she hands you the drink.",
+      "choices": {
+        "mississippi": "🌊 \"Have you ever heard of Mississippi?\"",
+        "adventure": "🧭 \"I like a little adventure now and then.\""
+      },
+      "textboxChoices": {
+        "liquorchat": {
+          "placeholder": "🗣️ Ask the bartender...",
+          "button": "💬 Ask",
+          "regex": {
+            "wild night|what do you mean|story": "wildnightstory",
+            "adventure|strange things": "adventure"
+          },
+          "default": "unknown"
+        }
+      }
+    },
+    "wildnightstory": {
+      "text": "🍸 \"This bar? It’s not just drinks — it’s a place where time and reality get a little... stretched.\"",
+      "choices": {
+        "liquor": "🔙 Back to your drink",
+        "adventure": "🧭 Ask about adventure"
+      }
+    },
+    "mississippi": {
+      "text": "🐊 The bartender raises an eyebrow. \"Not since the alligator incident of '09... 🐊😳\"",
+      "choices": {
+        "laugh": "😂 Laugh awkwardly",
+        "walkin": "🍸 Return to the bar"
+      }
+    },
+    "laugh": {
+      "text": "😅 You laugh it off, feeling a bit more at ease.",
+      "choices": {
+        "walkin": "🔁 Back to the bar"
+      }
+    },
+    "adventure": {
+      "text": "🌌 \"Well, you're in for a treat. Strange things happen here after midnight...\" she says with a wink. 🌙✨",
+      "choices": {
+        "keylime": "🍈 Try the key lime shot"
+      }
+    },
+    "keylime": {
+      "text": "✨ Shortly after taking the shot, you see a glowing lime 🍈 floating in the air, waving you toward a hallway.",
+      "choices": {
+        "hallwaylime": "🚶‍♂️ Follow the lime into the hallway"
+      }
+    },
+    "hallwaylime": {
+      "text": "🌈 You follow the glowing lime 🍈 down a dimly lit hallway. The walls shimmer with green neon light as jazz music grows louder. At the end of the corridor, a velvet curtain parts for you — seemingly on its own.",
+      "choices": {
+        "secretlounge": "🚪 Step through the curtain"
+      }
+    },
+    "secretlounge": {
+      "text": "🎷 You enter a hidden lounge filled with candlelight, velvet booths, and a live jazz trio playing smooth tunes. An elegant woman in a vintage gown approaches you with a sly smile.",
+      "choices": {
+        "mysterydrink": "🍷 Accept the drink she offers",
+        "askquestions": "❓ Ask her what's going on here"
+      },
+      "textboxChoices": {
+        "talktolady": {
+          "placeholder": "Say something to the mysterious woman...",
+          "button": "💬 Speak",
+          "regex": {
+            "who are you|your name": "ladyname",
+            "what is this|where am i": "loungeinfo",
+            "magic|lime|this drink": "drinklore"
+          },
+          "default": "unknownresponse"
+        }
+      }
+    },
+    "mysterydrink": {
+      "text": "🍷 You take a sip of the drink. It's rich, tangy, and strangely energizing. Suddenly, the room around you slows down — like time itself is stretching.",
+      "choices": {
+        "slowtime": "⏳ Embrace the moment",
+        "panic": "😰 Panic and look for an exit"
+      }
+    },
+    "askquestions": {
+      "text": "🕵️‍♂️ \"This is the Lime Room,\" she says. \"A place for those who notice the signs. Most people walk past the lime. But not you.\"",
+      "choices": {
+        "acceptmission": "🗺️ Ask if there’s more to discover",
+        "decline": "🚶‍♂️ Politely excuse yourself"
+      }
+    },
+    "slowtime": {
+      "text": "🌀 You lean into the sensation, and suddenly everything sharpens — you hear whispers of conversations past and future. You’ve unlocked *The Sight*.",
+      "choices": {
+        "walkin": "🔁 Return to the main bar, changed"
+      }
+    },
+    "panic": {
+      "text": "🚨 You bolt back through the curtain. The hallway twists and turns in ways it didn't before, but eventually, you find yourself back at the bar — shaken, but safe.",
+      "choices": {
+        "walkin": "🔁 Return to the bar"
+      }
+    },
+    "acceptmission": {
+      "text": "📜 She leans in and whispers a name and a phrase: *Uberto. The path is in the fizz.* Then vanishes into the crowd.",
+      "choices": {
+        "walkin": "🔁 Return to the bar, pondering her words"
+      }
+    },
+    "decline": {
+      "text": "😐 You thank her and return through the curtain. The hallway is quiet now. The lime is gone.",
+      "choices": {
+        "walkin": "🔁 Return to the bar"
+      }
+    },
+    "ladyname": {
+      "text": "👒 She smiles faintly. \"You can call me Livia. Names are like flavors here — always changing.\"",
+      "choices": {
+        "secretlounge": "🔙 Continue"
+      }
+    },
+    "loungeinfo": {
+      "text": "🛋️ \"This is the Lime Room. A place between places — for those who look beyond the ordinary.\"",
+      "choices": {
+        "secretlounge": "🔙 Continue"
+      }
+    },
+    "drinklore": {
+      "text": "🍹 \"That drink is older than this building. Made with key limes grown under a green moon. Most people can't even see it.\"",
+      "choices": {
+        "secretlounge": "🔙 Continue"
+      }
+    },
+    "milkorder": {
+      "text": "🥛 The bartender stares at you. \"Milk? You sure you're in the right place, partner?\"",
+      "choices": {
+        "walkin": "😅 Reconsider your order"
+      }
+    },
+    "sodaflavor": {
+      "text": "🧃 \"I’m a sucker for orange cream. Reminds me of childhood summers! What about you?\"",
+      "choices": {
+        "soda": "🔙 Keep chatting"
+      }
+    },
+    "sodaphilosophy": {
+      "text": "🧠 \"Soda is like life — sweet, fizzy, and sometimes a little unpredictable.\"",
+      "choices": {
+        "soda": "🔙 Keep chatting"
+      }
+    },
+    "unknownresponse": {
+      "text": "🤔 The man looks confused by your question and shakes his head.",
+      "choices": {
+        "talkhomeless": "🔙 Talk more",
+        "donate": "💵 Give him $5",
+        "walkin": "🚪 Enter the bar"
+      }
+    },
+    "unknown": {
+      "text": "🤷‍♂️ The bartender blinks, clearly unsure what you meant.",
+      "choices": {
+        "walkin": "🔙 Try again"
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import {useState, React}  from "react";
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Form, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 const stateToStyle = {"win":"Success","lose":"Danger"};
 export interface AdventureBoxProps {
@@ -25,6 +25,19 @@ nodes,
 		setFormat("Light");
 	}
 	}
+	function processText(event,name,box){
+		event.preventDefault();
+    for (var ind in Object.keys(box.regex)) {
+    	var reg = Object.keys(box.regex)[ind];
+    	var regex = new RegExp(reg);
+    	console.log(reg);
+        if (regex.test(event.target[1].value)){
+        	switchNode(box.regex[reg]);
+        	return;
+        }
+    }
+    switchNode(box.default);
+	}
 	return (
 		<Card border={format.toLowerCase()} 
 		bg={format.toLowerCase()}
@@ -39,6 +52,21 @@ nodes,
 		</Card.Text>
 		{node["choices"]?Object.entries(node["choices"]).map(([link,choice])=>(
 		<Card.Link onClick={()=>switchNode(link)}>{choice}</Card.Link>
+		)):''}
+		{node["textboxChoices"]?Object.entries(node["textboxChoices"]).map(([name,box]) =>(
+			
+				<Form onSubmit={(event)=>processText(event,name,box)}>
+			<InputGroup className="mb-3">
+				<Button type="submit" variant="outine-info" id="button-addon1">
+{box.button}
+				</Button>
+				<Form.Control
+				aria-label={box.placeholder}
+				aria-describedby="basic-addon1"
+				placeholder={box.placeholder}
+				/>
+			</InputGroup>
+				</Form>
 		)):''}
 		</Card.Body>
 		</Card>
