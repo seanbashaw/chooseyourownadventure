@@ -1,74 +1,101 @@
-import {useState, React}  from "react";
+"use client";
+
+import {useState} from "react";
 import { Card, Button, Form, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-const stateToStyle = {"win":"Success","lose":"Danger"};
-export interface AdventureBoxProps {
-/* Optional Title of Aventure */
-	nodes?:dict;
+
+interface Node {
+	text: string;
+	choices?: Record<string, string>;
+	textboxChoices?: Record<string, {
+		button: string;
+		placeholder: string;
+		regex: Record<string, string>;
+		default: string;
+	}>;
+	win?: string;
+	lose?: string;
 }
 
-/** These are mini adventures that you can take. They may interact with each other. Main components include a gif selection and choices in diferent inputs */
+interface NodesData {
+	title: string;
+	start_node: string;
+	nodes: Record<string, Node>;
+}
+
+export interface AdventureBoxProps {
+	/* Optional Title of Adventure */
+	nodes: NodesData;
+}
+
+/** These are mini adventures that you can take. They may interact with each other. Main components include a gif selection and choices in different inputs */
 export const AdventureBox = ({
-nodes,
-...props
+	nodes,
+	...props
 }: AdventureBoxProps) => {
-	const [node, setNode] = useState(nodes["nodes"][nodes["start_node"]]);
-	const [format,setFormat] = useState("Light");
-	function switchNode(link){
-		setNode(nodes["nodes"][link]);
-		console.log(node);
-	if ("win" in node){
-		setFormat("Success");
-	}else if ("lose" in node){
-		setFormat("Danger");
-	}else{
-		setFormat("Light");
+	const [node, setNode] = useState<Node>(nodes.nodes[nodes.start_node]);
+	const [format, setFormat] = useState<string>("Light");
+
+	function switchNode(link: string) {
+		const newNode = nodes.nodes[link];
+		setNode(newNode);
+		console.log(newNode);
+		if ("win" in newNode) {
+			setFormat("Success");
+		} else if ("lose" in newNode) {
+			setFormat("Danger");
+		} else {
+			setFormat("Light");
+		}
 	}
-	}
-	function processText(event,name,box){
+
+	function processText(event: React.FormEvent<HTMLFormElement>, name: string, box: { regex: Record<string, string>; default: string; button: string; placeholder: string }) {
 		event.preventDefault();
-    for (var ind in Object.keys(box.regex)) {
-    	var reg = Object.keys(box.regex)[ind];
-    	var regex = new RegExp(reg);
-    	console.log(reg);
-        if (regex.test(event.target[1].value)){
-        	switchNode(box.regex[reg]);
-        	return;
-        }
-    }
-    switchNode(box.default);
+		const target = event.target as HTMLFormElement;
+		const input = target[1] as HTMLInputElement;
+		
+		for (const reg of Object.keys(box.regex)) {
+			const regex = new RegExp(reg);
+			console.log(reg);
+			if (regex.test(input.value)) {
+				switchNode(box.regex[reg]);
+				return;
+			}
+		}
+		switchNode(box.default);
 	}
+
 	return (
-		<Card border={format.toLowerCase()} 
-		bg={format.toLowerCase()}
-		key={format}
-		text={format.toLowerCase() === 'light' ? 'dark' : 'white'}
-		          className="mb-2"
->
-		<Card.Body>
-		<Card.Title>{nodes.title}</Card.Title>
-		<Card.Text>
-			{node.text}
-		</Card.Text>
-		{node["choices"]?Object.entries(node["choices"]).map(([link,choice])=>(
-		<Card.Link onClick={()=>switchNode(link)}>{choice}</Card.Link>
-		)):''}
-		{node["textboxChoices"]?Object.entries(node["textboxChoices"]).map(([name,box]) =>(
-			
-				<Form onSubmit={(event)=>processText(event,name,box)}>
-			<InputGroup className="mb-3">
-				<Button type="submit" variant="outine-info" id="button-addon1">
-{box.button}
-				</Button>
-				<Form.Control
-				aria-label={box.placeholder}
-				aria-describedby="basic-addon1"
-				placeholder={box.placeholder}
-				/>
-			</InputGroup>
-				</Form>
-		)):''}
-		</Card.Body>
+		<Card 
+			border={format.toLowerCase()}
+			bg={format.toLowerCase()}
+			key={format}
+			text={format.toLowerCase() === 'light' ? 'dark' : 'white'}
+			className="mb-2"
+		>
+			<Card.Body>
+				<Card.Title>{nodes.title}</Card.Title>
+				<Card.Text>
+					{node.text}
+				</Card.Text>
+				{node.choices ? Object.entries(node.choices).map(([link, choice]) => (
+					<Card.Link key={link} onClick={() => switchNode(link)}>{choice}</Card.Link>
+				)) : null}
+				{node.textboxChoices ? Object.entries(node.textboxChoices).map(([name, box]) => (
+					<Form key={name} onSubmit={(event) => processText(event, name, box)}>
+						<InputGroup className="mb-3">
+							<Button type="submit" variant="outline-info" id="button-addon1">
+								{box.button}
+							</Button>
+							<Form.Control
+								aria-label={box.placeholder}
+								aria-describedby="basic-addon1"
+								placeholder={box.placeholder}
+							/>
+						</InputGroup>
+					</Form>
+				)) : null}
+			</Card.Body>
 		</Card>
 	);
 };
