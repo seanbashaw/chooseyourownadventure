@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import { AdventureBox } from "../components/AdventureBox";
-import pizzaAdventure from "../stories/AdventureNodes.json";
+import pizzaAdventure from "../stories/AdventureNodeTextBox.json";
 
 export default function Home() {
   return (
