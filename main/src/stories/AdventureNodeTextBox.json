@@ -60,14 +60,29 @@
           "placeholder": "🗣️ I'll have a...",
           "button": "🍹 Order",
           "regex": {
-            "soda|pop|coke|sprite": "soda",
-            "beer|wine|shot|liquor": "liquor",
-            "key lime shot": "keylime",
-            "milk": "milkorder"
+            "(?i)(soda|pop|(?:coca\\s*)?cola|sprite|fanta|7\\s*up|dr\\s*pepper|root\\s*beer)": "soda",
+            "(?i)(beer|wine|shot|(?:hard\\s*)?liquor|whiskey|vodka|rum|gin|tequila)": "liquor",
+            "(?i)(cosmo(?:politan)?|martini|manhattan|old\\s*fashioned|negroni)": "martini",
+            "(?i)(key\\s*lime\\s*shot|special\\s*lime\\s*drink)": "keylime",
+            "(?i)(milk|dairy|cream|half\\s*and\\s*half)": "milkorder"
           },
           "default": "unknown"
         }
       }
+    },
+    "martini": {
+      "text": "🍸 \"Sounds like someone’s getting fancy! They've got the best martinis here,\" says the person sitting next to you.",
+      "choices": {
+        "martinidrinker": "😄 \"I've drunk my fair share of martinis in my day.\"",
+        "horses": "🐴 \"Do you like horses?\""
+      }
+    },
+    "martinidrinker": {
+    "text": "🍸 \"Ah, a fellow connoisseur!\" they say, swirling their own drink. \"You know, they say the martinis here have... special properties. Ever notice how the olives seem to glow?\"",
+    "choices": {
+        "keylime": "🍈 \"Actually, I was thinking of trying a key lime shot...\"",
+        "investigate": "🔍 \"What do you mean by special properties?\"",
+        "walkin": "🚶‍♂️ \"I think I'll try something else.\""
     },
     "water": {
       "text": "💦 The bartender hands you a glass of water and says, \"This one's on me. Stay hydrated! 💧\"",
