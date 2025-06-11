@@ -11,7 +11,7 @@
       }
     },
     "talkhomeless": {
-      "text": "🧔‍♂️ The man looks up and says, \"You seem like someone who notices things. That bar’s more than it seems. Watch the lime 🍈 if you go inside.\"",
+      "text": "🧔‍♂️ The man looks up and says, \"You seem like someone who notices things. That bar's more than it seems. Watch the lime 🍈 if you go inside.\"",
       "choices": {
         "donate": "💵 Give him $5",
         "walkin": "🚪 Head into the bar"
@@ -29,7 +29,7 @@
       }
     },
     "homelesshint": {
-      "text": "🧔‍♂️ \"The lime isn’t just a fruit here. It’s a guide. Follow it if you want to see beyond the usual.\" 🍈✨",
+      "text": "🧔‍♂️ \"The lime isn't just a fruit here. It's a guide. Follow it if you want to see beyond the usual.\" 🍈✨",
       "choices": {
         "talkhomeless": "🔙 Talk more",
         "donate": "💵 Give him $5",
@@ -37,7 +37,7 @@
       }
     },
     "homelessstory": {
-      "text": "🧔‍♂️ \"I’ve been around this block a few times. The bar changed me once, gave me visions I still can’t explain. Take care inside.\"",
+      "text": "🧔‍♂️ \"I've been around this block a few times. The bar changed me once, gave me visions I still can't explain. Take care inside.\"",
       "choices": {
         "talkhomeless": "🔙 Talk more",
         "donate": "💵 Give him $5",
@@ -71,18 +71,19 @@
       }
     },
     "martini": {
-      "text": "🍸 \"Sounds like someone’s getting fancy! They've got the best martinis here,\" says the person sitting next to you.",
+      "text": "🍸 \"Sounds like someone's getting fancy! They've got the best martinis here,\" says the person sitting next to you.",
       "choices": {
         "martinidrinker": "😄 \"I've drunk my fair share of martinis in my day.\"",
         "horses": "🐴 \"Do you like horses?\""
       }
     },
     "martinidrinker": {
-    "text": "🍸 \"Ah, a fellow connoisseur!\" they say, swirling their own drink. \"You know, they say the martinis here have... special properties. Ever notice how the olives seem to glow?\"",
-    "choices": {
+      "text": "🍸 \"Ah, a fellow connoisseur!\" they say, swirling their own drink. \"You know, they say the martinis here have... special properties. Ever notice how the olives seem to glow?\"",
+      "choices": {
         "keylime": "🍈 \"Actually, I was thinking of trying a key lime shot...\"",
         "investigate": "🔍 \"What do you mean by special properties?\"",
         "walkin": "🚶‍♂️ \"I think I'll try something else.\""
+      }
     },
     "water": {
       "text": "💦 The bartender hands you a glass of water and says, \"This one's on me. Stay hydrated! 💧\"",
@@ -91,7 +92,7 @@
       }
     },
     "soda": {
-      "text": "🥤 \"Sounds like someone’s getting bubbly! They've got the best sodas here,\" says the person sitting next to you.",
+      "text": "🥤 \"Sounds like someone's getting bubbly! They've got the best sodas here,\" says the person sitting next to you.",
       "choices": {
         "sodadrinker": "😄 \"I've drunk my fair share of sodas in my day.\"",
         "horses": "🐴 \"Do you like horses?\""
@@ -120,7 +121,7 @@
       "lose": "🚫 You're kindly asked to leave the bar."
     },
     "liquor": {
-      "text": "🥃 \"Sounds like someone’s looking to have a wild night!\" the bartender jokes as she hands you the drink.",
+      "text": "🥃 \"Sounds like someone's looking to have a wild night!\" the bartender jokes as she hands you the drink.",
       "choices": {
         "mississippi": "🌊 \"Have you ever heard of Mississippi?\"",
         "adventure": "🧭 \"I like a little adventure now and then.\""
@@ -138,7 +139,7 @@
       }
     },
     "wildnightstory": {
-      "text": "🍸 \"This bar? It’s not just drinks — it’s a place where time and reality get a little... stretched.\"",
+      "text": "🍸 \"This bar? It's not just drinks — it's a place where time and reality get a little... stretched.\"",
       "choices": {
         "liquor": "🔙 Back to your drink",
         "adventure": "🧭 Ask about adventure"
@@ -197,19 +198,18 @@
     "mysterydrink": {
       "text": "🍷 You take a sip of the drink. It's rich, tangy, and strangely energizing. Suddenly, the room around you slows down — like time itself is stretching.",
       "choices": {
-        "slowtime": "⏳ Embrace the moment",
-        "panic": "😰 Panic and look for an exit"
+        "slowtime": "⏳ Embrace the moment"
       }
     },
     "askquestions": {
       "text": "🕵️‍♂️ \"This is the Lime Room,\" she says. \"A place for those who notice the signs. Most people walk past the lime. But not you.\"",
       "choices": {
-        "acceptmission": "🗺️ Ask if there’s more to discover",
+        "acceptmission": "🗺️ Ask if there's more to discover",
         "decline": "🚶‍♂️ Politely excuse yourself"
       }
     },
     "slowtime": {
-      "text": "🌀 You lean into the sensation, and suddenly everything sharpens — you hear whispers of conversations past and future. You’ve unlocked *The Sight*.",
+      "text": "🌀 You lean into the sensation, and suddenly everything sharpens — you hear whispers of conversations past and future. You've unlocked *The Sight*.",
       "choices": {
         "walkin": "🔁 Return to the main bar, changed"
       }
@@ -257,7 +257,7 @@
       }
     },
     "sodaflavor": {
-      "text": "🧃 \"I’m a sucker for orange cream. Reminds me of childhood summers! What about you?\"",
+      "text": "🧃 \"I'm a sucker for orange cream. Reminds me of childhood summers! What about you?\"",
       "choices": {
         "soda": "🔙 Keep chatting"
       }
