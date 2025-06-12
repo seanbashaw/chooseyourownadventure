@@ -60,11 +60,11 @@
           "placeholder": "🗣️ I'll have a...",
           "button": "🍹 Order",
           "regex": {
-            "(?i)(soda|pop|(?:coca\\s*)?cola|sprite|fanta|7\\s*up|dr\\s*pepper|root\\s*beer)": "soda",
-            "(?i)(beer|wine|shot|(?:hard\\s*)?liquor|whiskey|vodka|rum|gin|tequila)": "liquor",
-            "(?i)(cosmo(?:politan)?|martini|manhattan|old\\s*fashioned|negroni)": "martini",
-            "(?i)(key\\s*lime\\s*shot|special\\s*lime\\s*drink)": "keylime",
-            "(?i)(milk|dairy|cream|half\\s*and\\s*half)": "milkorder"
+            "soda|pop|coca|sprite|fanta|7up|drpepper|rootbeer": "soda",
+            "shot|liquor|whiskey|vodka|rum|gin|tequila": "liquor",
+            "cosmo|martini|manhattan|oldfashioned|negroni": "martini",
+            "(key lime special)|lime": "keylime",
+            "milk|dairy|cream": "milkorder"
           },
           "default": "unknown"
         }
