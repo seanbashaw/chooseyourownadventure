@@ -64,10 +64,18 @@
             "shot|liquor|whiskey|vodka|rum|gin|tequila": "liquor",
             "cosmo|martini|manhattan|oldfashioned|negroni": "martini",
             "(key lime special)|lime": "keylime",
+            "wine|champagne|sparkling|sangria": "wine",
             "milk|dairy|cream": "milkorder"
           },
           "default": "unknown"
         }
+      }
+    },
+    "wine": {
+      "text": "🍷 \"Sounds like someone's getting fancy! They've got the best wines here,\" says the person sitting next to you.",
+      "choices": {
+        "wildnightstory": "Any crazy story about the bar?",
+        "horses": "🐴 \"Do you like horses?\""
       }
     },
     "martini": {
