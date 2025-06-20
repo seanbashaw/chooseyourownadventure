@@ -61,7 +61,7 @@
           "button": "🍹 Order",
           "regex": {
             "soda|pop|coca|sprite|fanta|7up|drpepper|rootbeer": "soda",
-            "shot|liquor|whiskey|vodka|rum|gin|tequila": "liquor",
+            "shot|liquor|whiskey|vodka|rum|gin|tequila|beer|ipa|pilsner|cider": "liquor",
             "cosmo|martini|manhattan|oldfashioned|negroni": "martini",
             "(key lime special)|lime": "keylime",
             "wine|champagne|sparkling|sangria": "wine",
