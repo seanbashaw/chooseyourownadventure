@@ -1,10 +1,11 @@
+/* eslint-disable */ 
 "use client";
 
 import {useState} from "react";
 import { Card, Button, Form, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
-interface Node {
+export interface AdventureNode {
 	text: string;
 	choices?: Record<string, string>;
 	textboxChoices?: Record<string, {
@@ -17,10 +18,10 @@ interface Node {
 	lose?: string;
 }
 
-interface NodesData {
+export interface NodesData {
 	title: string;
 	start_node: string;
-	nodes: Record<string, Node>;
+	nodes: Record<string, AdventureNode>;
 }
 
 export interface AdventureBoxProps {
@@ -33,7 +34,7 @@ export const AdventureBox = ({
 	nodes,
 	...props
 }: AdventureBoxProps) => {
-	const [node, setNode] = useState<Node>(nodes.nodes[nodes.start_node]);
+	const [node, setNode] = useState<AdventureNode>(nodes.nodes[nodes.start_node]);
 	const [format, setFormat] = useState<string>("Light");
 
 	function switchNode(link: string) {
@@ -56,7 +57,6 @@ export const AdventureBox = ({
 		
 		for (const reg of Object.keys(box.regex)) {
 			const regex = new RegExp(reg);
-			console.log(reg);
 			if (regex.test(input.value.toLowerCase())) {
 				switchNode(box.regex[reg]);
 				return;
