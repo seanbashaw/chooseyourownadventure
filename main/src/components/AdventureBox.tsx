@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 export interface AdventureNode {
 	text: string;
-	choices?: Record<string, string>;
+	choices: { text: string; targetNode: string }[];
 	textboxChoices?: Record<string, {
 		button: string;
 		placeholder: string;
@@ -78,9 +78,9 @@ export const AdventureBox = ({
 				<Card.Text>
 					{node.text}
 				</Card.Text>
-				{node.choices ? Object.entries(node.choices).map(([link, choice]) => (
-					<Card.Link key={link} onClick={() => switchNode(link)}>{choice}</Card.Link>
-				)) : null}
+				{node.choices && node.choices.map((choice, idx) => (
+					<Card.Link key={choice.targetNode + idx} onClick={() => switchNode(choice.targetNode)}>{choice.text}</Card.Link>
+				))}
 				{node.textboxChoices ? Object.entries(node.textboxChoices).map(([name, box]) => (
 					<Form key={name} onSubmit={(event) => processText(event, name, box)}>
 						<InputGroup className="mb-3">
