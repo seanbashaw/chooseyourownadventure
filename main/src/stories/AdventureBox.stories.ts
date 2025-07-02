@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { AdventureBox } from '../components/AdventureBox';
+import { AdventureBox, processNode } from '../components/AdventureBox';
 import pizzaAdventure from "./AdventureNodes.json";
 import elevatorAdventure from "./AdventureNode2.json";
 import textboxAdventure from "./AdventureNodeTextBox.json";
+
 
 const meta = {
 	title: 'Example/AdventureBox',
@@ -15,19 +16,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	args: {
-		nodes: pizzaAdventure
-	}
+	args: processNode(pizzaAdventure)
 }; 
 
 export const ChatGPT: Story = {
-	args: {
-		nodes: elevatorAdventure
-	}
+	args:  processNode(elevatorAdventure)
 }; 
 
 export const TextBox: Story = {
-	args: {
-		nodes: textboxAdventure
-	}
+	args: processNode(textboxAdventure)
 };

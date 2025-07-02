@@ -18,6 +18,13 @@ export interface AdventureNode {
 	lose?: string;
 }
 
+export function processNode(data:any){
+	return {
+		title: data["title"],
+		start_node: data["start_node"],
+		nodes: data["nodes"]
+	}
+}
 export interface NodesData {
 	title: string;
 	start_node: string;
@@ -32,15 +39,17 @@ export interface AdventureBoxProps {
 /** These are mini adventures that you can take. They may interact with each other. Main components include a gif selection and choices in different inputs */
 export const AdventureBox = ({
 	nodes,
+	title,
+	start_node,
 	...props
-}: AdventureBoxProps) => {
-	const [node, setNode] = useState<AdventureNode>(nodes.nodes[nodes.start_node]);
+}: NodesData) => {
+	const [node, setNode] = useState<AdventureNode>(nodes[start_node]);
 	const [format, setFormat] = useState<string>("Light");
 
 	function switchNode(link: string) {
-		const newNode = nodes.nodes[link];
+		const newNode = nodes[link];
 		setNode(newNode);
-		console.log(newNode);
+		console.log(link);
 		if ("win" in newNode) {
 			setFormat("Success");
 		} else if ("lose" in newNode) {
@@ -74,13 +83,15 @@ export const AdventureBox = ({
 			className="mb-2"
 		>
 			<Card.Body>
-				<Card.Title>{nodes.title}</Card.Title>
+				<Card.Title>{title}</Card.Title>
 				<Card.Text>
 					{node.text}
 				</Card.Text>
-				{node.choices && node.choices.map((choice, idx) => (
-					<Card.Link key={choice.targetNode + idx} onClick={() => switchNode(choice.targetNode)}>{choice.text}</Card.Link>
-				))}
+				{node.choices ? Object.entries(node.choices).map(([targetNode, choice]) => (
+					<Card.Link key={targetNode} onClick={() => switchNode(choice.targetNode)}>
+						{choice.text}
+					</Card.Link>
+				)) : null}
 				{node.textboxChoices ? Object.entries(node.textboxChoices).map(([name, box]) => (
 					<Form key={name} onSubmit={(event) => processText(event, name, box)}>
 						<InputGroup className="mb-3">

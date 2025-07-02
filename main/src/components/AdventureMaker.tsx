@@ -4,8 +4,9 @@
 import {useState} from "react";
 import { Card, Button, Form, InputGroup, DropdownButton, Dropdown, SplitButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import { NodesData } from "./AdventureBox";
-import { AdventureNode } from "./AdventureBox";
+import { NodesData, AdventureNode } from "./AdventureBox";
+import { AdventureBox } from "./AdventureBox";
+
 interface AdventureMakerProps {
     nodes: NodesData;
 }
@@ -105,6 +106,17 @@ export const AdventureMaker = ({nodes: nodesProp, ...props}: AdventureMakerProps
             };
         });
     };
+    // Before rendering AdventureBox preview
+    const normalizedFormData: Record<string, AdventureNode> = Object.fromEntries(
+        Object.entries(formData)
+            .filter(([_, node]) =>
+                node &&
+                typeof node === 'object' &&
+                typeof (node as AdventureNode).text === 'string' &&
+                Array.isArray((node as AdventureNode).choices)
+            )
+            .map(([key, node]) => [key, node as AdventureNode])
+    );
     return (
         <Card>
             <Card.Body>
@@ -217,6 +229,11 @@ export const AdventureMaker = ({nodes: nodesProp, ...props}: AdventureMakerProps
                         </Form.Select>
                     </Form.Group>
                 </Form>
+                <AdventureBox
+                    title={nodesProp.title}
+                    start_node={currentNodeID}
+                    nodes={normalizedFormData}
+                />
             </Card.Body>
         </Card>
     );
