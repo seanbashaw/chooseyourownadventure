@@ -22,25 +22,10 @@ interface FormData {
     choices: FormChoice[];
 }
 
-export const AdventureMaker = ({nodes: nodesProp, ...props}: AdventureMakerProps) => {
+export const AdventureMaker = ({...nodeProps}: NodesData) => {
     const [isNodeIdInvalidated, setInvalidReason] = useState<string | false>(false);
-    const convertChoices = (node: AdventureNode): AdventureNode => {
-        if (Array.isArray(node.choices)) return node;
-        if (!node.choices) return { ...node, choices: [] };
-        return {
-            ...node,
-            choices: Object.entries(node.choices).map(([targetNode, text]) => ({ text: String(text), targetNode }))
-        };
-    };
-    const [formData, setFormData] = useState<Record<string, AdventureNode>>(() => {
-        const nodes = nodesProp.nodes;
-        const converted: Record<string, AdventureNode> = {};
-        for (const key in nodes) {
-            converted[key] = convertChoices(nodes[key]);
-        }
-        return converted;
-    });
-    const [currentNodeID, setCurrentNodeId] = useState(nodesProp.start_node);
+    const [formData, setFormData] = useState(nodeProps.nodes);
+    const [currentNodeID, setCurrentNodeId] = useState(nodeProps.start_node);
     const handleIDChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         const newForm = { ...formData };
@@ -56,6 +41,7 @@ export const AdventureMaker = ({nodes: nodesProp, ...props}: AdventureMakerProps
             setInvalidReason("The node you're trying to type exists already.");
         }
     };
+
     const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setFormData((prev: Record<string, AdventureNode>) => ({
@@ -106,17 +92,9 @@ export const AdventureMaker = ({nodes: nodesProp, ...props}: AdventureMakerProps
             };
         });
     };
-    // Before rendering AdventureBox preview
-    const normalizedFormData: Record<string, AdventureNode> = Object.fromEntries(
-        Object.entries(formData)
-            .filter(([_, node]) =>
-                node &&
-                typeof node === 'object' &&
-                typeof (node as AdventureNode).text === 'string' &&
-                Array.isArray((node as AdventureNode).choices)
-            )
-            .map(([key, node]) => [key, node as AdventureNode])
-    );
+    for (const key in formData[currentNodeID].choices){
+        console.log(key);//formData[currentNodeID].choices[key]);
+    }
     return (
         <Card>
             <Card.Body>
@@ -188,26 +166,28 @@ export const AdventureMaker = ({nodes: nodesProp, ...props}: AdventureMakerProps
                         <Form.Label>Enter your choices here</Form.Label>
                         {
                             formData[currentNodeID].choices &&
-                            formData[currentNodeID].choices.map((choice: { text: string; targetNode: string }, idx: number) => (
-                                <InputGroup className="mb-2" key={idx}>
-                                    <Form.Select
-                                        onChange={e => updateChoice(idx, 'targetNode', e.target.value)}
-                                        value={choice.targetNode}
-                                        aria-label="Default select example"
-                                    >
-                                        <option value="">Open this select menu</option>
-                                        {Object.keys(formData).map((key, i) => (
-                                            <option value={key} key={key}>{key}</option>
-                                        ))}
-                                    </Form.Select>
-                                    <Form.Control
-                                        type="text"
-                                        value={choice.text}
-                                        placeholder="Choice text"
-                                        onChange={e => updateChoice(idx, 'text', e.target.value)}
-                                    />
-                                </InputGroup>
-                            ))
+                            Object.entries(formData[currentNodeID].choices).map(
+                                ([choiceKey, choiceValue],num) => (
+                                    <InputGroup className="mb-2" key={choiceKey}>
+                                        <Form.Select
+                                            onChange={e => updateChoice(num, 'targetNode', e.target.value)}
+                                            value={choiceValue.targetNode}
+                                            aria-label="Default select example"
+                                        >
+                                            <option value="">Open this select menu</option>
+                                            {Object.keys(formData).map((nodeKey) => (
+                                                <option value={nodeKey} key={nodeKey}>{nodeKey}</option>
+                                            ))}
+                                        </Form.Select>
+                                        <Form.Control
+                                            type="text"
+                                            value={choiceValue.text}
+                                            placeholder="Choice text"
+                                            onChange={e => updateChoice(num, 'text', e.target.value)}
+                                        />
+                                    </InputGroup>
+                                )
+                            )
                         }
                     </Form.Group>
                     <Button variant="secondary" onClick={addChoice} className="me-2">
@@ -230,9 +210,9 @@ export const AdventureMaker = ({nodes: nodesProp, ...props}: AdventureMakerProps
                     </Form.Group>
                 </Form>
                 <AdventureBox
-                    title={nodesProp.title}
+                    title={nodeProps.title}
                     start_node={currentNodeID}
-                    nodes={normalizedFormData}
+                    nodes={nodeProps.nodes}
                 />
             </Card.Body>
         </Card>

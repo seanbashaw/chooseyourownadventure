@@ -1,8 +1,9 @@
 import styles from "./page.module.css";
-import { AdventureBox, NodesData } from "../components/AdventureBox";
+import { AdventureBox, NodesData ,processNode} from "../components/AdventureBox";
 import pizzaAdventure from "../stories/AdventureNodes.json";
 import textboxAdventure from "../stories/AdventureNodeTextBox.json";
 import elevator from "../stories/AdventureNode2.json";
+
 export default function Home() {
   return (
     <div className={styles.page}>
@@ -13,7 +14,7 @@ export default function Home() {
       </nav>
       <main className={styles.main}>
         <h1>Featured Adventures</h1>
-        <AdventureBox nodes={pizzaAdventure as NodesData} />
+        <AdventureBox {processNode(pizzaAdventure)} />
         <AdventureBox nodes={elevator as NodesData}/>
         <AdventureBox nodes={textboxAdventure as NodesData} />
       </main>
