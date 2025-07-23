@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 export interface AdventureNode {
 	text: string;
-	choices: { text: string; targetNode: string }[];
+	choices: string[][];
 	textboxChoices?: Record<string, {
 		button: string;
 		placeholder: string;
@@ -19,11 +19,24 @@ export interface AdventureNode {
 }
 
 export function processNode(data:any){
+	if (data){
 	return {
 		title: data["title"],
 		start_node: data["start_node"],
 		nodes: data["nodes"]
 	}
+}else{
+	return {
+	 title: "",
+	 start_node: "start",
+	 nodes: {
+		"start":{
+			"text":"Sample",
+			"choices":{},
+		}
+	}
+	}
+}
 }
 export interface NodesData {
 	title: string;
@@ -87,9 +100,9 @@ export const AdventureBox = ({
 				<Card.Text>
 					{node.text}
 				</Card.Text>
-				{node.choices ? Object.entries(node.choices).map(([targetNode,text,...props]) => (
+				{node.choices ? node.choices.map(([text, targetNode]) => (
 					<Card.Link key={targetNode} onClick={() => switchNode(targetNode)}>
-						{text.toString()}
+						{text}
 					</Card.Link>
 				)) : null}
 				{node.textboxChoices ? Object.entries(node.textboxChoices).map(([name, box]) => (

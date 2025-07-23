@@ -4,61 +4,61 @@
   "nodes": {
     "forest": {
       "text": "You’re walking through the forest 🌳 when you come across a random elevator standing alone. The doors are open and lights are flickering inside. Do you go in?",
-      "choices": {
-        "enter": "🚪 Enter the elevator",
-        "walkaway": "🚶‍♂️ Walk away"
-      }
+      "choices": [
+        ["enter", "🚪 Enter the elevator"],
+        ["walkaway", "🚶‍♂️ Walk away"]
+      ]
     },
     "enter": {
       "text": "You step inside. The doors close behind you. There are **no floor numbers** — just buttons labeled: 🔥, 🧊, 🌌, and 💰.",
-      "choices": {
-        "fire": "🔥 Press the flame button",
-        "ice": "🧊 Press the snowflake",
-        "space": "🌌 Press the galaxy",
-        "gold": "💰 Press the gold bar"
-      }
+      "choices": [
+        ["fire", "🔥 Press the flame button"],
+        ["ice", "🧊 Press the snowflake"],
+        ["space", "🌌 Press the galaxy"],
+        ["gold", "💰 Press the gold bar"]
+      ]
     },
     "walkaway": {
       "text": "You ignore the strange elevator. As you walk away, you hear it *ding* and disappear behind you with a *whoosh*.",
-      "choices": {
-        "runback": "🏃‍♀️ Run back to find it",
-        "keepwalking": "🚶 Keep walking"
-      }
+      "choices": [
+        ["runback", "🏃‍♀️ Run back to find it"],
+        ["keepwalking", "🚶 Keep walking"]
+      ]
     },
     "fire": {
       "text": "The elevator descends quickly and opens into a room full of lava, flame spirits, and unbearable heat! 🔥🌋",
-      "choices": {
-        "fight": "⚔️ Fight the flame spirits",
-        "retreat": "🏃‍♂️ Retreat into the elevator"
-      }
+      "choices": [
+        ["fight", "⚔️ Fight the flame spirits"],
+        ["retreat", "🏃‍♂️ Retreat into the elevator"]
+      ]
     },
     "ice": {
       "text": "You’re taken to a frozen tundra. A snow yeti waves at you with a giant smile. ❄️🧊",
-      "choices": {
-        "waveback": "👋 Wave back",
-        "snowball": "❄️ Throw a snowball"
-      }
+      "choices": [
+        ["waveback", "👋 Wave back"],
+        ["snowball", "❄️ Throw a snowball"]
+      ]
     },
     "space": {
-      "text": "You find yourself floating in zero gravity. Stars twinkle around you. A space whale swims by. 🪐🐋",
-      "choices": {
-        "ride": "🚀 Ride the space whale",
-        "float": "🛸 Just float and enjoy"
-      }
+      "text": "You find yourself floating in zero gravity. Stars twinkle around you. A space whale swims by. 🐐🐋",
+      "choices": [
+        ["ride", "🚀 Ride the space whale"],
+        ["float", "🛸 Just float and enjoy"]
+      ]
     },
     "gold": {
       "text": "The doors open to a glittering treasure room filled with gold coins, jewels, and chocolate bars. 💎🍫",
-      "choices": {
-        "grabgold": "💰 Grab as much as you can",
-        "lookaround": "👀 Look around first"
-      }
+      "choices": [
+        ["grabgold", "💰 Grab as much as you can"],
+        ["lookaround", "👀 Look around first"]
+      ]
     },
     "runback": {
       "text": "You run back but the elevator is gone. In its place is a strange silver key 🗝️ stuck in the ground.",
-      "choices": {
-        "takekey": "🗝️ Take the key",
-        "leavekey": "🙅 Leave it alone"
-      }
+      "choices": [
+        ["takekey", "🗝️ Take the key"],
+        ["leavekey", "🙅 Leave it alone"]
+      ]
     },
     "keepwalking": {
       "text": "You find a cozy cabin with hot cocoa and a friendly cat. Maybe the boring path is sometimes the safest. ☕🐱",
