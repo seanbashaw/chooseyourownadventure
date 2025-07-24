@@ -100,7 +100,7 @@ export const AdventureBox = ({
 				<Card.Text>
 					{node.text}
 				</Card.Text>
-				{node.choices ? node.choices.map(([text, targetNode]) => (
+				{node.choices ? node.choices.map(([targetNode,text]) => (
 					<Card.Link key={targetNode} onClick={() => switchNode(targetNode)}>
 						{text}
 					</Card.Link>

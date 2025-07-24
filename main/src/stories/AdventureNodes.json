@@ -6,8 +6,7 @@
 			"text": "You are relaxing 🛋️ in your living room when you hear a knock on the door 🚪.",
 			"choices": [
 				["answer", "🙋 Answer the door"],
-				["ignore", "🙈 Ignore it"],
-				["ignore", "Ignore with a passion."]
+				["ignore", "🙈 Ignore it"]
 			]
 		}, 
 		"answer": {

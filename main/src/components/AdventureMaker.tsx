@@ -28,7 +28,7 @@ export const AdventureMaker = (nodeProps: NodesData) => {
     const [formData, setFormData] = useState(nodeProps.nodes);
     const [currentNodeID, setCurrentNodeId] = useState(nodeProps.start_node);
     const [startNode, setStartNode] = useState(nodeProps.start_node);
-    const [title, setTitle] = useState(nodeProps.title)
+    const [title, setTitle] = useState(nodeProps.title);
     const handleIDChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         const newForm = { ...formData };
@@ -235,6 +235,32 @@ const updateChoice = (index: number, field: 0 | 1, value: string) => {
                             ))
                         }
                     </Form.Group>
+                    <Form.Group className="mb-3" controlId="adventureTextboxChoices">
+                        <Form.Label>Here you can add textboxes and define paths to follow based on regular expressions. If you want to learn check out <a href="https://regexone.com">this tutorial</a></Form.Label>
+                    {formData[currentNodeID].textboxChoices &&
+                        Object.entries(formData[currentNodeID].textboxChoices).map(([regex, target], id) => (
+                            <InputGroup className="mb-2" key={currentNodeID + '-textbox-' + id}>
+                                <Form.Control
+                                    type="text"
+                                    value={regex}
+                                    placeholder="Regex pattern"
+                                    readOnly
+                                />
+                                <Form.Select
+                                    value={target.placeholder}
+                                    aria-label="Select target node"
+                                    disabled
+                                >
+                                    <option value="">Select target node</option>
+                                    {Object.keys(formData).map((nodeKey) => (
+                                        <option value={nodeKey} key={nodeKey}>{nodeKey}</option>
+                                    ))}
+                                </Form.Select>
+                                {/* You can add edit/delete buttons here if you want to allow editing */}
+                            </InputGroup>
+                        ))
+                    }
+                    </Form.Group>
                     <Button variant="secondary" onClick={addChoice} className="me-2">
                         Add new choice
                     </Button>
@@ -246,7 +272,8 @@ const updateChoice = (index: number, field: 0 | 1, value: string) => {
                         <Form.Label>Jump to node</Form.Label>
                         <Form.Select
                             value={currentNodeID}
-                            onChange={e => setCurrentNodeId(e.target.value)}
+                            onChange={(e) => {setCurrentNodeId(e.target.value);
+                                console.log(currentNodeID)}}
                         >
                             {Object.keys(formData).map(key => (
                                 <option value={key} key={key}>{key}</option>
