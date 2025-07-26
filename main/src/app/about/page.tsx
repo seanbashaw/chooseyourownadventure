@@ -2,16 +2,12 @@ import styles from "./page.module.css";
 import { AdventureBox, NodesData } from "../../components/AdventureBox";
 import pizzaAdventure from "../../stories/AdventureNodes.json";
 import textboxAdventure from "../../stories/AdventureNodeTextBox.json";
+import { MainNav } from "../../components/MainNav";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-        <nav className={styles.nav}>
-        <a href="/" className={styles.navLink}>Home</a>
-        <br></br>
-        <a href="/about" className={styles.navLink}>About</a>
-      </nav>
       <main className={styles.main}>
+              <MainNav current="about"/>
         <h1>Why'd you make this?</h1>
         <p>I love choose your own adventure stories. So much so that I decided to make my own platform! I'm starting with text to get some of the basic and fun features sorted out but soon hope to have image and video support.</p>
         <h1>This looks cool, what's your inspiration?</h1>
@@ -21,6 +17,5 @@ export default function Home() {
         <h1>So how do I play an adventure?</h1>
         <p>Each adventure has a series of links that you can choose. Sometimes there will be textboxes which will take you in different directions depending on what you type in. More features are being added as we SPEAK!</p>
         </main>
-    </div>
   );
 }

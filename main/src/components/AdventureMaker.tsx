@@ -1,12 +1,13 @@
 /* eslint-disable */ 
 "use client";
-import { Trash } from "react-bootstrap-icons";
-import {useState} from "react";
+import { Check, CheckCircle, DoorOpen, Trash } from "react-bootstrap-icons";
+import {ChangeEvent, MouseEvent, useState} from "react";
 import { Card, Button, Form, InputGroup, DropdownButton, Dropdown, SplitButton } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import { NodesData, AdventureNode } from "./AdventureBox";
 import { AdventureBox } from "./AdventureBox";
 import { Prev } from "react-bootstrap/esm/PageItem";
+import { text } from "stream/consumers";
 
 interface AdventureMakerProps {
     nodes: NodesData;
@@ -29,6 +30,7 @@ export const AdventureMaker = (nodeProps: NodesData) => {
     const [currentNodeID, setCurrentNodeId] = useState(nodeProps.start_node);
     const [startNode, setStartNode] = useState(nodeProps.start_node);
     const [title, setTitle] = useState(nodeProps.title);
+    const [fileName,setFileName] = useState("");
     const handleIDChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         const newForm = { ...formData };
@@ -93,20 +95,29 @@ setFormData(prev => ({
     }
 }));
 };
-const downloadJSON = () =>{
+const downloadJSON = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const data = {
+        title: title,
+        start_node: startNode,
+        nodes: formData
+    };
+    const jsonStr = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
 
-}
-const updateChoice = (index: number, field: 0 | 1, value: string) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${fileName || "adventure"}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+};
+const updateChoice = (index: number, field: 0 | 1, value: string, type: "link" | "textbox") => {
     setFormData(prev => {
-        const oldChoices = prev[currentNodeID].choices;
-        const updatedChoice = field === 0
-            ? [value, oldChoices[index][1]]
-            : [oldChoices[index][0], value];
-        const newChoices = [
-            ...oldChoices.slice(0, index),
-            updatedChoice,
-            ...oldChoices.slice(index + 1)
-        ];
+        const newChoices = prev[currentNodeID].choices;
+        newChoices[index][field] = value;
         return {
             ...prev,
             [currentNodeID]: {
@@ -165,8 +176,8 @@ const updateChoice = (index: number, field: 0 | 1, value: string) => {
                         <Form.Label>Adventure Node Text</Form.Label>
                         <Form.Control
                             required
-                            type="text"
-                            name="text"
+                            type="textarea"
+                            name="textarea"
                             placeholder="Enter adventure node text"
                             value={formData[currentNodeID].text}
                             onChange={handleTextChange}
@@ -214,8 +225,10 @@ const updateChoice = (index: number, field: 0 | 1, value: string) => {
                             formData[currentNodeID].choices &&
                             formData[currentNodeID].choices.map((choiceValue, num) => (
                                 <InputGroup className="mb-2" key={currentNodeID+'-'+num}>
+                                    <Button variant="outline-secondary" id="button-addon1" onClick={(e)=>{setCurrentNodeId(choiceValue[0])}}>
+          <DoorOpen/></Button>
                                     <Form.Select
-                                        onChange={(e) => updateChoice(num, 0, e.target.value)}
+                                        onChange={(e) => updateChoice(num, 0, e.target.value,"link")}
                                         value={choiceValue[0]}
                                         aria-label="Default select example"
                                     >
@@ -228,45 +241,135 @@ const updateChoice = (index: number, field: 0 | 1, value: string) => {
                                         type="text"
                                         value={choiceValue[1]}
                                         placeholder="Choice text"
-                                        onChange={(e) => updateChoice(num, 1, e.target.value)}
+                                        onChange={(e) => updateChoice(num, 1, e.target.value,"link")}
                                     />
                                     <Button variant="outline-secondary" onClick={()=>deleteChoice(num)}><Trash/></Button>
                                 </InputGroup>
                             ))
                         }
                     </Form.Group>
+                    <Button variant="secondary" onClick={addChoice} className="me-2">
+                        Add new choice
+                    </Button>
                     <Form.Group className="mb-3" controlId="adventureTextboxChoices">
                         <Form.Label>Here you can add textboxes and define paths to follow based on regular expressions. If you want to learn check out <a href="https://regexone.com">this tutorial</a></Form.Label>
                     {formData[currentNodeID].textboxChoices &&
-                        Object.entries(formData[currentNodeID].textboxChoices).map(([regex, target], id) => (
+                        Object.entries(formData[currentNodeID].textboxChoices).map(([name, textbox], id) => (
                             <InputGroup className="mb-2" key={currentNodeID + '-textbox-' + id}>
-                                <Form.Control
-                                    type="text"
-                                    value={regex}
-                                    placeholder="Regex pattern"
-                                    readOnly
-                                />
-                                <Form.Select
-                                    value={target.placeholder}
-                                    aria-label="Select target node"
-                                    disabled
+                                <InputGroup className="mb-3">
+        
+        <Form.Control
+          placeholder="Textbox Name"
+          value={name}
+          aria-label="Textbox Name"
+          aria-describedby="basic-addon2"
+        />
+        <Form.Select
+                                    value={textbox.default}
+                                    aria-label="Select default node choice"
                                 >
-                                    <option value="">Select target node</option>
+                                    <option value="">Select default node choice</option>
                                     {Object.keys(formData).map((nodeKey) => (
                                         <option value={nodeKey} key={nodeKey}>{nodeKey}</option>
                                     ))}
                                 </Form.Select>
-                                {/* You can add edit/delete buttons here if you want to allow editing */}
-                            </InputGroup>
+        <Button variant="outline-secondary" id="button-addon1">
+          <Trash/>
+        </Button>
+      </InputGroup>
+      {Object.entries(textbox.regex).map(([regex,node],id)=>(
+                                <InputGroup>
+                                <Button variant="outline-secondary" id="button-addon1" onClick={(e)=>{setCurrentNodeId(node)}}>
+                                <DoorOpen/></Button>
+                                <Form.Select
+                            value={node}
+                            onChange={(e) => {
+                                const newRegex = e.target.value;
+                                setFormData(prev => ({
+                                    ...prev,
+                                    [currentNodeID]: {
+                                        ...prev[currentNodeID],
+                                        textboxChoices: {
+                                            ...prev[currentNodeID].textboxChoices,
+                                            [name]: {
+                                                ...prev[currentNodeID].textboxChoices[name],
+                                                regex: {
+                                                    ...prev[currentNodeID].textboxChoices[name].regex,
+                                                    [regex]: e.target.value
+                                                }
+                                            }
+                                        }
+                                    }
+                                }));
+                            }}
+                        >
+                            {Object.keys(formData).map(key => (
+                                <option value={key} key={key}>{key}</option>
+                            ))}
+                        </Form.Select>
+                                <Form.Control
+                                        type="text"
+                                        value={regex}
+                                        placeholder="Choice text"
+                                        onChange={(e) => {
+                                            const newRegex = e.target.value;
+                                            setFormData(prev => ({
+                                                ...prev,
+                                                [currentNodeID]: {
+                                                    ...prev[currentNodeID],
+                                                    textboxChoices: {
+                                                        ...prev[currentNodeID].textboxChoices,
+                                                        [name]: {
+                                                            ...prev[currentNodeID].textboxChoices[name],
+                                                            regex: Object.fromEntries(
+                                                                Object.entries(prev[currentNodeID].textboxChoices?.[name].regex || {})
+                                                                    .map(([k, v]) =>
+                                                                        k === regex
+                                                                            ? [newRegex, v]
+                                                                            : [k, v]
+                                                                    )
+                                                            )
+                                                        }
+                                                    }
+                                                }
+                                            }));
+                                        }}
+                                    />
+                                    
+                        <Button variant="outline-secondary" onClick={() => {
+    const newChoices = formData[currentNodeID].textboxChoices;
+    
+setFormData(prev => ({
+    ...prev, 
+    [currentNodeID]: {
+        ...prev[currentNodeID],
+        textboxChoices: newChoices
+    }
+}));}
+}><Trash/></Button>
+                                </InputGroup>
+                            ))}
+</InputGroup>
                         ))
                     }
                     </Form.Group>
-                    <Button variant="secondary" onClick={addChoice} className="me-2">
-                        Add new choice
+                    <InputGroup className="mb-3">
+                    <Button
+                        variant="primary"
+                        type="button"
+                        onClick={downloadJSON}
+                    >
+                        Download Adventure as
                     </Button>
-                    <Button variant="primary" type="submit">
-                        Save Adventure
-                    </Button>
+                    <Form.Control
+          placeholder="Enter file name (default is adventure)"
+          value={fileName}
+          aria-label="Enter File Name (default is adventure)"
+          aria-describedby="basic-addon2"
+          onChange={(e)=>{setFileName(e.target.value);}}
+        />
+        <InputGroup.Text>.json</InputGroup.Text>
+                    </InputGroup>
                     <hr />
                     <Form.Group className="mb-3" controlId="nodeSelector">
                         <Form.Label>Jump to node</Form.Label>
@@ -281,11 +384,6 @@ const updateChoice = (index: number, field: 0 | 1, value: string) => {
                         </Form.Select>
                     </Form.Group>
                 </Form>
-                <AdventureBox
-                    title={title}
-                    start_node={startNode}
-                    nodes={formData}
-                />
             </Card.Body>
         </Card>
     );

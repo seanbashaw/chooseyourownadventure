@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 export interface AdventureNode {
 	text: string;
 	choices: string[][];
-	textboxChoices?: Record<string, {
+	textboxChoices: Record<string, {
 		button: string;
 		placeholder: string;
 		regex: Record<string, string>;
@@ -25,14 +25,15 @@ export function processNode(data:any){
 		start_node: data["start_node"],
 		nodes: data["nodes"]
 	}
-}else{
+	}else{
 	return {
 	 title: "",
 	 start_node: "start",
 	 nodes: {
 		"start":{
 			"text":"Sample",
-			"choices":{},
+			"choices":[],
+			"textboxChoices":{}
 		}
 	}
 	}
