@@ -7,9 +7,12 @@ import { processNode } from "@/utils/processNode";
 import { MainNav } from "../../components/MainNav";
 export default function AdventureMakerPage() {
     return (
-        <main style={{ padding: "2rem" }}>
+        <>
             <MainNav current="maker"/>
+
+        <main style={{ padding: "2rem" }}>
             <AdventureMaker {...processNode(pizzaAdventure)} />
         </main>
+        </>
     );
 } 
