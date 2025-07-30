@@ -10,12 +10,13 @@ import { AdventureMaker } from "@/components/AdventureMaker";
 export default function Home() {
   return (
     <>
-    <MainNav current="maker"/>
+    <MainNav current="adventures"/>
     <main className={styles.main}>
-      <h2 style={{textAlign:"center"}}>Make your own adventure here!</h2>
-      <AdventureMaker {...processNode(textboxAdventure)}/>
+      <h2 style={{textAlign:"center"}}>Featured adventures.</h2>
+      <AdventureBox {...processNode(pizzaAdventure)}/>
+      <AdventureBox {...processNode(elevator)}/>
+      <AdventureBox {...processNode(textboxAdventure)}/>
       </main>
   </>
-    
   );
 }
