@@ -18,7 +18,8 @@
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.10",
     "react-bootstrap-icons": "^1.11.6",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-ga4": "^2.1.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
